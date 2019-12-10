@@ -3,7 +3,7 @@
 	overflow: hidden;
 }
 
-.card-image {
+.card .card-image {
 	height: 250px; /* Your height here */
 	overflow: hidden;
 }
