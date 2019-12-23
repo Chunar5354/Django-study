@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- add codes between block and endblock into base.html(where block in base.html) --> 
+
+	<!-- use form to create a input line -->
+	<form action="{% url 'book_search' %}" method="post">
+		<!-- add csrf_token here, or when you type 'Enter' or click the button, there will be an error -->
+		{% csrf_token %}
+		<!-- placeholder is the default value when you have not type any words in -->
+		<input type="text" name="search" placeholder="Search a book">
+		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+			<i class="material-icons left">search</i>
+		</button>
+		<!-- type 'text' is a input line, type 'submit' is a button -->
+	</form>
+
+	<!-- use double '{}' to income a argument -->
+	<!-- and the 'title' can give an initial capital -->
+	<!-- The arguments in {} are the same as those in the rendered dictionary in views.py -->
+	<h2 style="text-align: center">{{ search | title }}</h2>
+
+	<div class="row">
+		<!-- Use for to show all the results -->
+		{% for book in books_list %}
+			<div class="col s4">
+				<div class="card">
+					<div class="card-image">
+						<a href="{{ book.1 }}"><img src="{{ book.2 }}" alt=""></a>
+					</div>
+					<div class=card-content">
+						<p style="text-align: center">{{ book.0 }}</p>
+					</div>
+					<div class="card-action">
+						<a href="{{ book.1 }}" style="text-align: center">{{ book.3 }}</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock content %}
+
