@@ -7,7 +7,7 @@ from . import models
 
 
 def home(request):
-	return render(request, 'base.html')
+	return render(request, 'home.html')
 
 def book_search(request):
 	BASE_URL = 'http://search.dangdang.com/?key={}&act=input'

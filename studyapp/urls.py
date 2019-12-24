@@ -19,5 +19,6 @@ from django.urls import path, include
 # The first argument in path() is how you search the url in your browser
 urlpatterns = [
 	path('', include('myapp.urls')),
+	path('todo/', include('todo.urls')),
     path('admin/', admin.site.urls),
 ]
