@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2 style="text-align: center">Chart Test</h2>
+        
+    <ul id="temperature" class="dropdown-content">
+        <li><a href="../temperature">前端绕组</a></li>
+        <li class="divider"></li>
+        <li><a href="../temperature">后端绕组</a></li>
+        <li class="divider"></li>
+        <li><a href="../temperature">冷却水</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Tags</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="../voltage">电压</a></li>
+                <li><a href="../current">电流</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="temperature">温度<i class="material-icons right">arrow_drop_down</i></a></li>
+
+            </ul>
+        </div>
+    </nav>
+              
+    <div id="bar" style="width:1000px; height:500px;"></div>
+    <script>
+        var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
+        var old_data = [];
+        $(
+            function () {
+                fetchData(chart);
+                setInterval(fetchData, 2000);
+            }
+        );
+
+        $(document).ready(function(){
+            $(".dropdown-trigger").dropdown();
+        });
+
+        function fetchData() {
+            $.ajax({
+                type: "GET",
+                url: "../temperaturechart",
+                dataType: "json",
+                success: function (result) {
+                    var options = result.data;
+                    chart.setOption(options);
+                    old_data = chart.getOption().series[0].data;
+                }
+            });
+        }
+
+        function getDynamicData() {
+            $.ajax({
+                type: "GET",
+                url: "../lineUpdate",
+                dataType: 'json',
+                success: function (result) {
+                    var options = result.data;
+                    old_data.push([options.name, options.value]);
+                    chart.setOption({
+                        series: [{
+                            data: old_data
+                        }]
+                    });
+                }
+            });
+        }
+
+    </script>
+
+{% endblock content %}
