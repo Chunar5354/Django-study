@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'studyapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'studyapp',
+        'NAME': 'motor',
 		'USER': 'Chunar',
 		'PASSWORD': 'chun.0927',
 		'HOST': 'localhost',
