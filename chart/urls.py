@@ -10,5 +10,7 @@ urlpatterns = [
 	path('current/', views.CurrentView.as_view(), name='chart'),
 	path('voltage/', views.VoltageView.as_view(), name='chart'),
 	path('temperature/', views.TemperatureView.as_view(), name='chart'),
+	path('overview/', views.overview, name='chart'),
+	path('overviewData/', views.overviewData, name='chart'),
 ]
 

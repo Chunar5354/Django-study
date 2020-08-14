@@ -163,3 +163,47 @@ class VoltageView(APIView):
 class TemperatureView(APIView):
 	def get(self, request, *args, **kwargs):
 		return render(request, 'chart/temperature.html')
+
+def overviewData(request):
+	curr_time = models.Temp_rotator.objects.last().create_time
+	current_a = str(models.Current_A.objects.last().value)
+	current_b = str(models.Current_B.objects.last().value)
+	current_c = str(models.Current_C.objects.last().value)
+	voltage_ab = str(models.Voltage_AB.objects.last().value)
+	voltage_bc = str(models.Voltage_BC.objects.last().value)
+	voltage_ca = str(models.Voltage_CA.objects.last().value)
+	temp_fore_winding_a = str(models.Temp_fore_winding_A.objects.last().value)
+	temp_fore_winding_b = str(models.Temp_fore_winding_B.objects.last().value)
+	temp_fore_winding_c = str(models.Temp_fore_winding_C.objects.last().value)
+	temp_controller_env = str(models.Temp_controller_env.objects.last().value)
+	temp_fore_bearing = str(models.Temp_fore_bearing.objects.last().value)
+	temp_rear_bearing = str(models.Temp_rear_bearing.objects.last().value)
+	temp_rotator = str(models.Temp_rotator.objects.last().value)
+	temp_water = str(models.Temp_water.objects.last().value)
+	rev = str(models.Rev.objects.last().value)
+
+	stuff_for_frontend = {
+		'create_time': str(curr_time),
+		'current_a': current_a + 'A',
+		'current_b': current_b + 'A',
+		'current_c': current_c + 'A',
+		'voltage_ab': voltage_ab + 'V',
+		'voltage_bc': voltage_bc + 'V',
+		'voltage_ca': voltage_ca + 'V',
+		'temp_fore_winding_a': temp_fore_winding_a + '℃',
+		'temp_fore_winding_b': temp_fore_winding_b + '℃',
+		'temp_fore_winding_c': temp_fore_winding_c + '℃',
+		'temp_controller_env': temp_controller_env + '℃',
+		'temp_fore_bearing': temp_fore_bearing + '℃',
+		'temp_rear_bearing': temp_rear_bearing + '℃',
+		'temp_rotator': temp_rotator + '℃',
+		'temp_water': temp_water + '℃',
+		'rev': rev + 'r/min',
+	}
+
+	# return render(request, 'chart/overview.html', stuff_for_frontend)
+	return JsonResponse(stuff_for_frontend)
+
+def overview(request):
+	return render(request, 'chart/overview.html')
+	

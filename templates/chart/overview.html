@@ -1,0 +1,116 @@
+{% extends 'chart/index.html' %}
+
+{% block chart %}
+	<table class="striped centered" style="width: 60%; margin: auto">
+		<thead>
+		<tr>
+			<th>参数名</th>
+			<th>数值</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<tr>
+			<td>A相电流</td>
+			<td id="current_a">0.00</td>
+		</tr>
+		<tr>
+			<td>B相电流</td>
+			<td id="current_b">0.00</td>
+		</tr>
+		<tr>
+			<td>C相电流</td>
+			<td id="current_c">0.00</td>
+		</tr>
+		<tr>
+			<td>AB相电压</td>
+			<td id="voltage_ab">0.00</td>
+		</tr>
+		<tr>
+			<td>BC相电压</td>
+			<td id="voltage_bc">0.00</td>
+		</tr>
+		<tr>
+			<td>CA相电压</td>
+			<td id="voltage_ca">0.00</td>
+		</tr>
+		<tr>
+			<td>绕组A温度</td>
+			<td id="temp_fore_winding_a">0.00</td>
+		</tr>
+		<tr>
+			<td>绕组B温度</td>
+			<td id="temp_fore_winding_b">0.00</td>
+		</tr>
+		<tr>
+			<td>绕组C温度</td>
+			<td id="temp_fore_winding_c">0.00</td>
+		</tr>
+		<tr>
+			<td>前端轴承温度</td>
+			<td id="temp_fore_bearing">0.00</td>
+		</tr>
+		<tr>
+			<td>后端轴承温度</td>
+			<td id="temp_rear_bearing">0.00</td>
+		</tr>
+		<tr>
+			<td>冷却水温度</td>
+			<td id="temp_water">0.00</td>
+		</tr>
+		<tr>
+			<td>转子温度</td>
+			<td id="temp_rotator">0.00</td>
+		</tr>
+		<tr>
+			<td>环境温度</td>
+			<td id="temp_controller_env">0.00</td>
+		</tr>
+		<tr>
+			<td>转速</td>
+			<td id="rev">0.00</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript">
+		$(
+			function () {
+				fetchData();
+				setInterval(fetchData, 2000);
+			}
+		);
+
+		$(document).ready(function(){
+			$(".dropdown-trigger").dropdown();
+		});
+
+		function fetchData() {
+			$.ajax({
+				type: "GET",
+				url: "../overviewData",
+				dataType: "json",
+				success: function (result) {
+					var data = result.data;
+					$("#current_a").html(data.current_a);
+					$("#current_b").html(data.current_b);
+					$("#current_c").html(data.current_c);
+					$("#voltage_ab").html(data.voltage_ab);
+					$("#voltage_bc").html(data.voltage_bc);
+					$("#voltage_ca").html(data.voltage_ca);
+					$("#temp_fore_winding_a").html(data.temp_fore_winding_a);
+					$("#temp_fore_winding_b").html(data.temp_fore_winding_b);
+					$("#temp_fore_winding_c").html(data.temp_fore_winding_c);
+					$("#temp_fore_bearing").html(data.temp_fore_bearing);
+					$("#temp_rear_bearing").html(data.temp_rear_bearing);
+					$("#temp_water").html(data.temp_water);
+					$("#temp_rotator").html(data.temp_rotator);
+					$("#temp_controller_env").html(data.temp_controller_env);
+					$("#rev").html(data.rev);
+				}
+			});
+		}
+	</script>
+
+{% endblock chart %}
+
