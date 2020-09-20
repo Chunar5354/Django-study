@@ -1,0 +1,31 @@
+{% extends "userprofile/user.html" %}
+
+{% block content %}
+   <div class="row">
+        <form class="col s12" method="post" action="{% url 'register' %}">
+               {% csrf_token %}
+               <!-- 账号 -->
+               <div class="input-field col s12">
+                   <label for="username">Username</label>
+                   <input type="text" class="form-control" id="username" name="username" required>
+               </div>
+               <!-- 邮箱 -->
+               <div class="input-field col s12">
+                   <label for="email">Email</label>
+                   <input type="email" class="form-control" id="email" name="email">
+               </div>
+               <!-- 密码 -->
+               <div class="input-field col s12">
+                   <label for="password">Password</label>
+                   <input type="password" class="form-control" id="password" name="password" required>
+               </div>
+               <!-- 确认密码 -->
+               <div class="input-field col s12">
+                   <label for="password2">Verify Password</label>
+                   <input type="password" class="form-control" id="password2" name="password2" required>
+               </div>
+               <!-- 提交按钮 -->
+               <button type="submit" class="waves-effect waves-light btn">Submit</button>
+        </form>
+   </div>
+{% endblock content %}
