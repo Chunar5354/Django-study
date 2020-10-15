@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
 	'myapp.apps.MyappConfig',
+	'movie.apps.MovieConfig',
 	'userprofile.apps.UserprofileConfig',
 	'todo.apps.TodoConfig',
 	'chart.apps.ChartConfig',
@@ -139,6 +140,9 @@ STATIC_URL = '/static/'
 # TEll django where the static files are stored
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # configure for email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -149,4 +153,5 @@ EMAIL_HOST_USER = '1186330927@qq.com'
 EMAIL_HOST_PASSWORD = 'qgcttpwoxmnbbaha'
 EMAIL_HOST_PREFIX = 'Chunar test'
 EMAIL_USE_SSL = True
+
 

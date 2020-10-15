@@ -21,6 +21,7 @@ urlpatterns = [
 	path('', include('myapp.urls')),
 	path('todo/', include('todo.urls')),
 	path('chart/', include('chart.urls')),
+	path('movie/', include('movie.urls')),
 	path('userprofile/', include('userprofile.urls')),
     path('admin/', admin.site.urls),
 ]
